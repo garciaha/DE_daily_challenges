@@ -26,11 +26,27 @@ It takes 4 iterations to reach a single-digit number.
 
 
 def additive_persistence(number):
-    pass
+    num_as_str = str(number)
+    count = 0
+    while len(num_as_str) > 1:
+        count += 1
+        num_as_str = str(sum([int(s) for s in num_as_str]))
+    return count
 
+
+def prod(numbers):
+    product = 1
+    for x in numbers:
+        product = product * x
+    return product
 
 def multiplicative_persistence(number):
-    pass
+    num_as_str = str(number)
+    count = 0
+    while len(num_as_str) > 1:
+        count += 1
+        num_as_str = str(prod([int(s) for s in num_as_str]))
+    return count
 
 
 if __name__ == '__main__':

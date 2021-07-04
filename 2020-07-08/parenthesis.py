@@ -11,7 +11,17 @@ Balanced: Every opening parens ( must exist with its matching closing parens ) i
 
 
 def split_cluster(cluster):
-    pass
+    status_calc = {"(": 1, ")": -1}
+    clusters = []
+    current = ""
+    status = 0
+    for p in cluster:
+        status += status_calc[p]
+        current += p
+        if status == 0:
+            clusters.append(current)
+            current = ""
+    return clusters
 
 
 if __name__ == '__main__':

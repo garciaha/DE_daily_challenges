@@ -29,8 +29,11 @@ The function should return True if every number can see the front-stage, and Fal
 
 
 def can_see_stage(stage):
-    pass
-
+    for row in range(0, len(stage) - 1):
+        for person in range(0, len(stage[row])):
+            if stage[row][person] >= stage[row+1][person]:
+                return False
+    return True
 
 if __name__ == '__main__':
     assert can_see_stage([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == True
