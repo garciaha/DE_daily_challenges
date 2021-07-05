@@ -21,8 +21,15 @@ Think about it like falling sand in Minecraft as opposed to the rigid blocks in 
 
 
 def switch_gravity_on(number):
-    pass
-
+    count = [0 for col in range(len(number[0]))]
+    for row in range(len(number)):
+        for col in range(len(number[row])):
+            count[col] += 1 if number[row][col] == "#" else 0
+    new_grid = [["-" for x in range(len(number[0]))] for y in range(len(number))]
+    for x in range(len(count)):
+        for y in range(count[x]):
+            new_grid[len(number) - y - 1][x] = "#"
+    return new_grid
 
 if __name__ == '__main__':
     assert switch_gravity_on([

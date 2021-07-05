@@ -13,9 +13,16 @@ Zero to all digits in the second number may be used.
 
 
 def max_possible(num_1, num_2):
-    pass
-
-
+    num1_list = [int(x) for x in str(num_1)]
+    num2_sort = sorted([int(x) for x in str(num_2)], reverse = True)
+    index = 0
+    for x in range(len(num1_list)):
+       if num2_sort[index] > num1_list[x]:
+           num1_list[x] = num2_sort[index]
+           index += 1
+           if index >= len(num2_sort):
+               break
+    return int("".join([str(x) for x in num1_list]))
 if __name__ == '__main__':
     assert max_possible(523, 76) == 763
     assert max_possible(9132, 5564) == 9655

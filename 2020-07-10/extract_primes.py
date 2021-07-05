@@ -14,8 +14,21 @@ These should be treated as the same number, so the result would simply be [3].
 """
 
 
+def is_prime(number):
+    if number < 2:
+        return False
+    for x in range(2, number):
+        if number % x == 0:
+            return False
+    return True
+
 def extract_primes(number):
-    pass
+    splits = []
+    number = str(number)
+    if len(number) == 1:
+        return [int(number)] if is_prime(int(number)) else []
+    splits = [int(number[i:j]) for i in range(len(number)) for j in range(i + 1, len(number) + 1) if is_prime(int(number[i:j])) and number[i] != "0"]
+    return sorted(splits)
 
 
 if __name__ == '__main__':

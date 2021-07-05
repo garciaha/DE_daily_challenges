@@ -11,7 +11,23 @@ The minimum alternating substring size is 2.
 
 
 def longest_substring(input):
-    pass
+    start = 0
+    end = 0
+    max = 0
+    max_string = ""
+    while end < len(input) - 1:
+        if int(input[end + 1]) % 2 != int(input[end]) % 2:
+            end += 1
+            if max < end - start + 1:
+                max_string = input[start:end + 1]
+                max = len(max_string)
+        else:
+           start = end
+           end += 1
+           while end < len(input) - 1 and int(input[start]) % 2 == int(input[end]) % 2:
+               start += 1
+               end += 1 
+    return max_string
 
 
 if __name__ == '__main__':

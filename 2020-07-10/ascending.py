@@ -10,8 +10,13 @@ and the string has at least two of them.
 
 
 def ascending(number):
-    pass
-
+    lengths = [x for x in range(1, len(number)) if len(number) % x == 0]
+    for l in lengths:
+        splits = [int(number[(i*l):(i+1)*l]) for i in range(int(len(number) / l))]
+        check = [False for i in range(len(splits) - 1) if splits[i] + 1 != splits[i+1]]
+        if check == []:
+            return True
+    return False
 
 if __name__ == '__main__':
     assert ascending("232425") == True  # Consecutive numbers 23, 24, 25

@@ -12,7 +12,16 @@ If improper fractions can be transformed into integers, do so in your code.
 
 
 def simplify(fraction):
-    pass
+    frac = fraction.split("/")
+    frac = [int(x) for x in frac]
+    for i in range(frac[0], 1, -1):
+        if frac[0] % i == 0 and frac[1] % i == 0:
+            frac[0] = frac[0] / i
+            frac[1] = frac[1] / i
+    if frac[1] == 1:
+        return str(int(frac[0]))
+    else:
+        return str(int(frac[0])) + "/" + str(int(frac[1]))
 
 
 if __name__ == '__main__':
