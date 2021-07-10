@@ -20,9 +20,18 @@ num_grid([
 ]
 """
 
+def adj_list(pos, board):
+    a = pos[0]
+    b = pos[1]
+    return [(a + x, b + y) for x in range(-1, 2) for y in range(-1, 2) if 0 <= a + x and a + x < len(board) and 0 <= b + y and b + y < len(board[a+x]) and board[a+x][b+y] == "#"]
 
 def num_grid(grid):
-    pass
+    result = grid[:]
+    for x in range(len(grid)):
+        for y in range(len(grid[x])):
+            if grid[x][y] == "-":
+                result[x][y] = str(len(adj_list((x, y), grid)))
+    return result
 
 
 if __name__ == '__main__':

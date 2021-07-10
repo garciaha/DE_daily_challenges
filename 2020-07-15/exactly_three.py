@@ -10,8 +10,13 @@ Notes
 
 
 def is_exactly_three(number):
-    pass
-
+    divisors = []
+    for x in range(1, number + 1):
+        if number % x == 0:
+            divisors.append(x)
+            if len(divisors) > 3:
+                return False
+    return len(divisors) == 3
 
 if __name__ == '__main__':
     assert is_exactly_three(4) == True  # 4 has only 3 divisors: 1, 2 and 4

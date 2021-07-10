@@ -15,10 +15,20 @@ Notes
 The numbers are going to be rather big so creating that string won't be practical.
 """
 
+"""
+0	1	0	1 - 1 = 0	
+0	10	9	1 * (10 - 1)
+0 	100	189	(1 * (10 - 1))  + 2 * (100-10) 
+0	2020	6969	(9) + (180) + (3*(1000 - 100)) + (4*(2020-1000))
+"""
+import math
 
 def digits(number):
-    pass
-
+    result = 0
+    for x in range(2, len(str(number)) + 1):
+        result += (x - 1) * (math.pow(10, x - 1) - math.pow(10, x - 2))
+    result += len(str(number)) * (number - math.pow(10, len(str(number)) - 1))
+    return int(result)
 
 if __name__ == '__main__':
     assert digits(1) == 0

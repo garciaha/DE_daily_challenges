@@ -14,8 +14,27 @@ If you do not understand the instructions, write the 3x3 list example on a piece
 
 
 def spiral_transposition(number_lists):
-    pass
-
+    unspiral = []
+    while len(number_lists) > 0:
+        # right
+        for i in range(len(number_lists[0])):
+            unspiral.append(number_lists[0].pop(0))
+            if number_lists[0] == []:
+                number_lists.pop(0)
+        # down
+        for i in range(len(number_lists)):
+            unspiral.append(number_lists[i].pop(-1))
+        if len(number_lists) == 0:
+            break
+        # left
+        for i in range(len(number_lists[-1])):
+            unspiral.append(number_lists[-1].pop(-1))
+            if number_lists[-1] == []:
+                number_lists.pop(-1)
+        # up
+        for i in range(len(number_lists) - 1, -1, -1):
+            unspiral.append(number_lists[i].pop(0)) 
+    return unspiral
 
 if __name__ == '__main__':
     assert spiral_transposition([

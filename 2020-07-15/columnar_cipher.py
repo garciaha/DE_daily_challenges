@@ -53,10 +53,25 @@ l	x	x	x	x
 1	3	2	4	5
 """
 
+def cipher(msg, keyword):
+    cypher = dict((sorted(keyword)[i], msg[i*int(len(msg)/len(keyword)):(i+1)*int(len(msg)/len(keyword))]) for i in range(len(keyword)))
+    result = ""
+    for y in range(int(len(msg)/len(keyword))):
+        for x in keyword:
+            result += cypher[x][y]
+    return result
 
 def c_cipher(msg, keyword):
-    pass
-
+    stripped = "".join([char.lower() for word in msg.split() for char in word if char.isalpha()])
+    if stripped == msg:
+        return cipher(stripped, keyword)
+    if len(stripped) % len(keyword) != 0:
+        stripped += "x" * (len(keyword) - (len(stripped) % len(keyword)))
+    cypher = dict((keyword[i], [stripped[i + len(keyword)*x] for x in range(int(len(stripped) / len(keyword)))]) for i in range(len(keyword)))
+    result = ""
+    for key in sorted(cypher.keys()):
+        result += "".join(cypher[key])
+    return result
 
 if __name__ == '__main__':
 

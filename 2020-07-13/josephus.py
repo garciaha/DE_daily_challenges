@@ -16,9 +16,15 @@ If the interval is 3, the first soldiers to die are at positions 3, 6, and 9.
 
 
 def josephus(soldiers, interval):
-    pass
-
-
+    soldier_list = [x + 1 for x in range(0, soldiers)]
+    pos = interval - 1
+    while len(soldier_list) > 1:
+        while len(soldier_list) > 1 and pos < len(soldier_list):
+            soldier_list.pop(pos)
+            pos += interval - 1
+        pos -= len(soldier_list)
+    return soldier_list[0]
+    
 if __name__ == '__main__':
     assert josephus(41, 3) == 31
     assert josephus(35, 11) == 18

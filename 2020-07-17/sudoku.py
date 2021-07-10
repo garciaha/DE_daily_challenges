@@ -18,10 +18,15 @@ sudoku_validator([
 ]) -> true
 """
 
-
 def sudoku_validator(board):
-    pass
-
+    check = [x + 1 for x in range(9)]
+    for x in range(9):
+        row = [board[x][y] for y in range(9)]
+        col = [board[y][x] for y in range(9)]
+        box = [board[3 * int(x / 3) + a][3*(x % 3) + b] for a in range(3) for b in range(3)]
+        if sorted(row) != check or sorted(col) != check or sorted(box) != check:
+            return False
+    return True
 
 if __name__ == '__main__':
     assert sudoku_validator([

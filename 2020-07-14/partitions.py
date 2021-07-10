@@ -15,9 +15,14 @@ Notes
 Remember the trivial partition n = n. Also, we say there is one way to partition zero; namely, 0 = 0.
 """
 
+from itertools import combinations_with_replacement
 
 def partitions(number):
-    pass
+    c = [list(combinations_with_replacement([x for x in range(1, number + 1)], y)) for y in range(number+1)]
+    sums = []
+    for x in c:
+        sums += [y for y in x if sum(list(y)) == number]
+    return len(sums)
 
 
 if __name__ == '__main__':

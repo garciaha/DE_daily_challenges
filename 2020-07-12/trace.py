@@ -24,9 +24,52 @@ Target word and the letters grid will be in upper case.
 """
 
 
-def trace_word_path(word, board):
-    pass
+def adj_list(pos, board):
+    a = pos[0]
+    b = pos[1]
+    return [ (a + x, b + y) for x in range(-1, 2) for y in range(-1, 2) if (x == 0 or y == 0) and (a + x >= 0 and a + x < len(board[0]) and b + y >= 0 and b + y < len(board))]
 
+def trace_word_path(word, board):
+    letter_pos = dict((x, []) for x in word)
+    for x in range(0, len(board)):
+        for y in range(0, len(board[x])):
+            if board[x][y] in letter_pos.keys():
+                letter_pos[board[x][y]].append((x, y))
+    
+    if 0 in [len(letter_pos[word[i]]) for i in range(len(word))]:
+        return "Not present"
+    if (0, 0) not in letter_pos[word[0]]:
+        return "Not present"
+
+    path = []
+    queue = [(0, 0)]
+    parent = {(0, 0): "None"}
+    i = 0 
+    
+    while len(queue) > 0:
+        current = queue.pop(0)
+        adj = [x for x in adj_list(current, board) if i + 1 < len(word) and x in letter_pos[word[i + 1]]]
+        if len(adj) == 0 and i != len(word) - 1:
+            del parent[current]
+            continue
+        elif i + 1 >= len(word):
+            break
+        for next in adj:
+            if next not in parent:
+                queue.append(next)
+                parent[next] = current
+                
+                if next in letter_pos[word[i + 1]]:
+                    i += 1   
+                if i == len(word):
+                    break  
+    
+    current = [x for x in letter_pos[word[i]] if x in parent][0]
+    path.append(current)
+    while current != (0,0):
+        path.insert(0, parent[current])
+        current = parent[current]
+    return path
 
 if __name__ == '__main__':
     assert str(trace_word_path("BISCUIT", [

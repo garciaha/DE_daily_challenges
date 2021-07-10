@@ -14,8 +14,13 @@ Vowels are: a, e, i, o, u.
 
 
 def nearest_vowel(word):
-    pass
-
+    vowel = ["a", "e", "i", "o", "u"]
+    result = [0 if x in vowel else "X" for x in word]
+    vowels = [x for x in range(len(result)) if result[x] == 0]
+    for x in range(len(result)):
+        if x not in vowels:
+            result[x] = min([abs(x - y) for y in vowels])
+    return result
 
 if __name__ == '__main__':
     assert nearest_vowel("aaaaa") == [0, 0, 0, 0, 0]

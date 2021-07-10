@@ -15,8 +15,11 @@ vertical_txt("Holy bananas") -> [
 
 
 def vertical_txt(message):
-    pass
-
+    lengths = [len(word) for word in message.split()]
+    result = []
+    for x in range(0, max(lengths)):
+        result.append([word[x] if len(word) > x else " " for word in message.split()])
+    return result
 
 if __name__ == '__main__':
     assert vertical_txt("Holy bananas") == [
