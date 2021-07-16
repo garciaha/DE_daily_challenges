@@ -21,9 +21,24 @@ Notes
 More specifically, look at the overlap between the previous words ending letters and the next word's beginning letters.
 """
 
-
 def connect(words):
-    pass
+    shared = []
+    connected = words[0]
+    for x in range(1, len(words)):
+        start = words[x][0]
+        end = words[x-1][-1]
+        last = words[x-1][::-1]
+        spos = last.find(start)
+        epos = words[x].find(end)
+
+        if start in words[x-1] and end in words[x] and last[:spos+1][::-1] == words[x][:epos+1]:
+            shared.append(epos+1)
+            connected += words[x][epos+1:]    
+        else:
+            shared.append(0)
+            connected += words[x]
+
+    return [connected, min(shared)] 
 
 
 if __name__ == '__main__':

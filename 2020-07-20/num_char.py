@@ -18,7 +18,16 @@ Test cases will containg integer and float numbers and single letters.
 
 
 def num_then_char(arrays):
-    pass
+    lengths = [len(x) for x in arrays]
+    sorted_array = sum(arrays, [])
+    sorted_array = sorted([x for x in sorted_array if type(x) is not str]) + sorted([x for x in sorted_array if type(x) is str])
+    result = []
+    for x in lengths:
+        current = []
+        for x in range(x):
+            current.append(sorted_array.pop(0))
+        result.append(current)
+    return result
 
 
 if __name__ == '__main__':

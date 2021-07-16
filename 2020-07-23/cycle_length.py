@@ -32,7 +32,18 @@ numbers leads the first AND the second number to be put to their rightful places
 
 
 def cycle_length(numbers, n):
-    pass
+    sortedn = sorted(numbers)
+    cycles = 0
+    pos = numbers.index(n)
+    while numbers[pos] != sortedn[pos]:
+        newpos = sortedn.index(n)
+        temp = numbers[newpos]
+        numbers[newpos] = n
+        numbers[pos] = temp
+        n = temp
+        cycles += 1
+    return cycles
+        
 
 
 if __name__ == '__main__':

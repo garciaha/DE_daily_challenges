@@ -33,9 +33,18 @@ If the first round has multiple poppable blocks, pop starting from the left.
 
 
 def popping(board):
-    pass
-
-
+    popped = True
+    while popped:
+        popped = False
+        for x in range(len(board) - 1):
+            start = x
+            end = x
+            while end + 1 < len(board) and board[start] == board[end + 1]:
+                end += 1
+            if start != end:
+                board = board[:start] + board[end+1:]
+                popped = True
+    return board
 if __name__ == '__main__':
     assert popping(["B", "B", "A", "C", "A", "A", "C"]) == ["A"]
     assert popping(["B", "B", "C", "C", "A", "A", "A"]) == []
